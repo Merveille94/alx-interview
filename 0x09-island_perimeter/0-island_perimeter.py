@@ -7,21 +7,29 @@ def island_perimeter(grid):
     """
     Calculates the perimeter of the island described in grid
     Args:
-        grid: 2d list of integers containing 0(water) or 1(land)
-    Return:
-        the perimeter of the island
+        grid (list): 2D list of integers where 0 is water, 1 is land
+    Returns:
+        int: Perimeter of the island
     """
+    perimeter = 0
+    rows = len(grid)
+    cols = len(grid[0]) if grid else 0
 
-    p = 0
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
-            if (grid[i][j] == 1):
-                if (i <= 0 or grid[i - 1][j] == 0):
-                    p += 1
-                if (i >= len(grid) - 1 or grid[i + 1][j] == 0):
-                    p += 1
-                if (j <= 0 or grid[i][j - 1] == 0):
-                    p += 1
-                if (j >= len(grid[i]) - 1 or grid[i][j + 1] == 0):
-                    p += 1
-    return p
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 1:
+                # Start with 4 sides for the current land cell
+                perimeter += 4
+
+                # Check for adjacent land cells (shared sides)
+                if i > 0 and grid[i - 1][j] == 1:  # Top neighbor
+                    perimeter -= 1
+                if i < rows - 1 and grid[i + 1][j] == 1:  # Bottom neighbor
+                    perimeter -= 1
+                if j > 0 and grid[i][j - 1] == 1:  # Left neighbor
+                    perimeter -= 1
+                if j < cols - 1 and grid[i][j + 1] == 1:  # Right neighbor
+                    perimeter -= 1
+
+    return perimeter
+
