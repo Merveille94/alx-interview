@@ -1,35 +1,21 @@
 #!/usr/bin/python3
-"""Island Perimeter Problem
+"""
+0-island_perimeter
 """
 
 
 def island_perimeter(grid):
-    """
-    Calculates the perimeter of the island described in grid
-    Args:
-        grid (list): 2D list of integers where 0 is water, 1 is land
-    Returns:
-        int: Perimeter of the island
-    """
+    """ Returns perimeter of an island description in grid """
     perimeter = 0
-    rows = len(grid)
-    cols = len(grid[0]) if grid else 0
+    m = len(grid)
+    n = len(grid[0])
 
-    for i in range(rows):
-        for j in range(cols):
+    for i in range(m):
+        for j in range(n):
             if grid[i][j] == 1:
-                # Start with 4 sides for the current land cell
-                perimeter += 4
-
-                # Check for adjacent land cells (shared sides)
-                if i > 0 and grid[i - 1][j] == 1:  # Top neighbor
-                    perimeter -= 1
-                if i < rows - 1 and grid[i + 1][j] == 1:  # Bottom neighbor
-                    perimeter -= 1
-                if j > 0 and grid[i][j - 1] == 1:  # Left neighbor
-                    perimeter -= 1
-                if j < cols - 1 and grid[i][j + 1] == 1:  # Right neighbor
-                    perimeter -= 1
-
+                for x, y in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
+                    a, b = i + x, j + y
+                    # print(a, b)
+                    if a >= m or b >= n or a < 0 or b < 0 or grid[a][b] == 0:
+                        perimeter += 1
     return perimeter
-
