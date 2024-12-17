@@ -1,48 +1,42 @@
 #!/usr/bin/python3
-
-def is_prime(num):
-    if num < 2:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
-
-
-def prime_count(n):
-    primes = [True] * (n + 1)
-    primes[0], primes[1] = False, False
-    count = 0
-
-    for i in range(2, n + 1):
-        if primes[i]:
-            count += 1
-            for j in range(i * i, n + 1, i):
-                primes[j] = False
-
-    return count
+"""0. Prime Game - Maria and Ben are playing a game"""
 
 
 def isWinner(x, nums):
-    if x <= 0 or not nums:
+    """x - rounds
+    nums - numbers list
+    """
+    if x <= 0 or nums is None:
+        return None
+    if x != len(nums):
         return None
 
-    maria_wins = 0
-    ben_wins = 0
+    ben = 0
+    maria = 0
 
-    max_n = max(nums)
-    prime_counts = [prime_count(i) for i in range(max_n + 1)]
+    a = [1 for x in range(sorted(nums)[-1] + 1)]
+    a[0], a[1] = 0, 0
+    for i in range(2, len(a)):
+        rm_multiples(a, i)
 
-    for n in nums:
-        if prime_counts[n] % 2 == 1:
-            maria_wins += 1
+    for i in nums:
+        if sum(a[0:i + 1]) % 2 == 0:
+            ben += 1
         else:
-            ben_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
+            maria += 1
+    if ben > maria:
         return "Ben"
-    else:
-        return None
+    if maria > ben:
+        return "Maria"
+    return None
 
+
+def rm_multiples(ls, x):
+    """removes multiple
+    of primes
+    """
+    for i in range(2, len(ls)):
+        try:
+            ls[i * x] = 0
+        except (ValueError, IndexError):
+            break
