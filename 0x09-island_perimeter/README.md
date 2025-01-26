@@ -2,11 +2,11 @@
 0x09. Island Perimeter
 
 Author's Details
-Name: Wendy Munyasi.
+Name: Emanuele Merveille.
 
-Email: wendymunyasi@gmail.com
+Email: emanueleguehi@gmail.com
 
-Tel: +254707240068.
+Tel: +233503235762.
 
 Requirements
 Python Scripts
