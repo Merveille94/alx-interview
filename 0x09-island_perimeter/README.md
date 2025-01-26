@@ -26,4 +26,4 @@ Project Description
 guillaume@ubuntu:~/0x09$ ./0-main.py
 12
 Collaborate
-To collaborate, reach me through my email address wendymunyasi@gmail.com.
+To collaborate, reach me through my email address emanueleguehi@gmail.com.
